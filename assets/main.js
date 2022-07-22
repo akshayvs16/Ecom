@@ -26,7 +26,7 @@ let products = [
     {
         id : 5,
         name : "Nk shoes bt05",
-        image : "https://images.pexels.com/photos/847371/pexels-photo-847371.jpeg?cs=srgb&dl=pexels-frans-van-heerden-847371.jpg&fm=jpg",
+        image : "https://images.pexels.com/photos/4271576/pexels-photo-4271576.jpeg?cs=srgb&dl=pexels-alleksana-4271576.jpg&fm=jpg",
         price : 755
     },
     {
@@ -105,15 +105,47 @@ let removeItem = (id) => {
 //     console.log(item.productId == id);
 //     return 
 //   })
-    cart = cart.map(item => {
-        if (item.productId == id) {
-            item.quantity--;
+    cart.forEach((item, index) => {
+        if (item.productId == id && item.quantity > 1) {
+            cart[index].quantity --;
+        }else if (item.productId == id && item.quantity == 1) {
+            cart =cart.filter(item => item.productId != id)
         }
             return item
     })
     renderProducts()
 
 }
+let cartBodyTag = document.querySelector('#cartItems .modal-body')
+
+let renderCart =() =>{
+     cartBodyTag.innerHTML = ""
+     
+     let cartTotal = 0
+       cart.forEach(item => {
+        let product = products.filter(prod => prod.id === item.productId)
+        cartTotal += product[0].price * item.quantity
+
+         cartBodyTag.innerHTML += `<div class="card mb-3">
+         <div class="row g-0">
+           <div class="col-md-4">
+             <img src="${product[0].image}" class="img-fluid rounded-start" alt="...">
+           </div>
+           <div class="col-md-8">
+             <div class="card-body">
+               <h5 class="card-title">${product[0].name}</h5>
+               <p class="card-text">₹ ${product[0].price} x ${item.quantity}</p>
+               <p class="card-text"><small class="text-muted">Last updated 1 mins ago</small></p>
+             </div>
+           </div>
+         </div>
+       </div>` 
+       })
+
+       document.querySelector('#cartTotal').innerHTML = "Grand Total ₹"+cartTotal
+}
+
+
 
 
 renderProducts()
