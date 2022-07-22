@@ -118,6 +118,7 @@ let removeItem = (id) => {
     renderCart()
 }
 let cartBodyTag = document.querySelector('#cartItems .modal-body')
+let mainBtnTag = document.querySelector('#mainBtn')
 
 let renderCart =() =>{
      cartBodyTag.innerHTML = ""
@@ -144,9 +145,26 @@ let renderCart =() =>{
        })
 
        document.querySelector('#cartTotal').innerHTML = "Grand Total ₹"+cartTotal
+     mainBtnTag.innerHTML = `  <button type="button" class="btn btn-primary" onclick=" handleCheckOut()">Checkout</button>`
 }
 
 
 
+let handleCheckOut = () => {
+    cartBodyTag.innerHTML = `<div class="mb-3">
+    <label for="fullNameInput" class="form-label">Full Name</label>
+    <input type="text" class="form-control" id="fullNameInput" placeholder="Full name">
+  </div>
+    <div class="mb-3">
+      <label for="emailInput" class="form-label">Email address</label>
+      <input type="email" class="form-control" id="emailInput" placeholder="name@example.com">
+    
+  </div>`
+  mainBtnTag.innerHTML = `<button type="button" class="btn btn-primary">Checkout</button>`
+}
+
+let handleOrder = () =>{
+    cartBodyTag.innerHTML = ``
+}
 
 renderProducts()
