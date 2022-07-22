@@ -96,6 +96,7 @@ let addMoreItem = (id) => {
             return item
     })
     renderProducts()
+    renderCart()
 
 }
 
@@ -114,7 +115,7 @@ let removeItem = (id) => {
             return item
     })
     renderProducts()
-
+    renderCart()
 }
 let cartBodyTag = document.querySelector('#cartItems .modal-body')
 
@@ -135,7 +136,7 @@ let renderCart =() =>{
              <div class="card-body">
                <h5 class="card-title">${product[0].name}</h5>
                <p class="card-text">₹ ${product[0].price} x ${item.quantity}</p>
-               <p class="card-text"><small class="text-muted">Last updated 1 mins ago</small></p>
+               <a  class="btn btn-primary" onclick="removeItem(${product[0].id})">-</a> ${item.quantity} <a  class="btn btn-primary" onclick="addMoreItem(${product[0].id})">+</a>
              </div>
            </div>
          </div>
